@@ -72,24 +72,23 @@ export class BooksService {
     this.setLocalStorageBooks();
   }
 
-private setLocalStorageBooks(){
-  localStorage.removeItem('book')
-  localStorage.setItem("book", JSON.stringify(this.dataBooks));
-}
+  private setLocalStorageBooks(){
+    localStorage.setItem("book", JSON.stringify(this.dataBooks));
+  }
 
-getBooks():Observable<Ibook[]>{
-    this.dataBooks = JSON.parse(localStorage.getItem("book")); 
-    return of (this.dataBooks)
-}
-getBookById(id:string){
-  let currentItem = this.dataBooks.find(item => item.isbn === id)
-  return currentItem;
-}
- addBookItem(item:Ibook){
-   this.dataBooks.push(item);
-   this.setLocalStorageBooks()
- }
- updateBook( bookiItem:Ibook){
+  getBooks():Observable<Ibook[]>{
+      this.dataBooks = JSON.parse(localStorage.getItem("book")); 
+      return of (this.dataBooks)
+  }
+  getBookById(id:string){
+    let currentItem = this.dataBooks.find(item => item.isbn === id)
+    return currentItem;
+  }
+  addBookItem(item:Ibook){
+    this.dataBooks.push(item);
+    this.setLocalStorageBooks()
+  }
+  updateBook( bookiItem:Ibook){
   this.dataBooks = JSON.parse(localStorage.getItem("book")); 
   const targetIdx = this.dataBooks .map(item => item.isbn).indexOf(bookiItem.isbn);
   this.dataBooks [targetIdx].author = bookiItem.author;
@@ -97,11 +96,11 @@ getBookById(id:string){
   this.dataBooks [targetIdx].coverPhotoURL = bookiItem.coverPhotoURL;
   this.dataBooks [targetIdx].title = bookiItem.title;
   this.setLocalStorageBooks()
- }
+  }
 
- removeBookItem(bookiItem:Ibook){
+  removeBookItem(bookiItem:Ibook){
   const targetIdx = this.dataBooks.map(item => item.isbn).indexOf(bookiItem.isbn);
   this.dataBooks.splice(targetIdx,1)
   this.setLocalStorageBooks()
- }
+  }
 }
