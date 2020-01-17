@@ -4,6 +4,8 @@ import { Ibook } from '../../types/Ibook';
 import { BookModel } from '../../types/BookModel'
 import { DatePipe } from '@angular/common';
 
+
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',

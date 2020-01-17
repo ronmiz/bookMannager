@@ -88,9 +88,7 @@
                          *ngIf="coverPhotoURL.errors && (coverPhotoURL.dirty || coverPhotoURL.touched)">
                         <p *ngIf="coverPhotoURL.errors.required">Cover Photo UR is required</p>
                     </div>
-            
-    
-        
+
             <button type="submit"
                     class="btn btn-primary"
                     [disabled]="f.invalid">Submit

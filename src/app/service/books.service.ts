@@ -1,13 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Ibook } from '../../types/Ibook';
 import { Observable, of } from 'rxjs';
+import { BookModel } from 'src/types/BookModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
- 
-  dataBooks:Array<Ibook> = 
+  dataBooks:Array<BookModel> = 
      [
       {
         "isbn": "9781593275846",
