@@ -1,0 +1,109 @@
+
+<h1>Books</h1>
+  <div class="main-container">
+    <div class="book-list">
+  <input class="form-control search" type="search" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder=" Start searching for title">
+        <ul *ngIf=[books]>
+            <li *ngFor="let book of books  | filterList:searchText" 
+            [class.selected]="book === selectedBook"
+            (click) = getBookById(book)>
+                <p class="name"  >{{ book.title}} , {{book.author}}</p><div (click) = deleteBook(book)><button class="btn btn-outline-danger">X</button></div>
+            </li>
+        </ul>
+     </div>
+    <div class="cover">
+        <img src="{{imageSrc}}" />
+    </div>
+    
+    <div class="container">
+        <form novalidate
+              (ngSubmit)="onSubmit(f.value)"
+              #f="ngForm">
+                <div class="form-group">
+                        <input type="text"
+                           class="form-control"
+                           name="title"
+                           [(ngModel)]="model.title"
+                           required
+                           #title="ngModel"
+                           placeholder="Book title">
+                </div>
+            <div class="form-control-feedback"
+                *ngIf="title.errors && (title.dirty || title.touched)">
+               <p *ngIf="title.errors.required">title name is required</p>
+           </div>
+           <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="author"
+                           [(ngModel)]="model.author"
+                           required
+                           #author="ngModel"
+                           placeholder="Author name">
+           </div>
+                    <div class="form-control-feedback"
+                         *ngIf="author.errors && (author.dirty || author.touched)">
+                        <p *ngIf="author.errors.required">author name is required</p>
+                    </div>
+            <div class="form-group">
+                    <input type="text"
+                    class="form-control"
+                    name="isbn"
+                    [(ngModel)]="model.isbn"
+                    required
+                    #isbn="ngModel"
+                    placeholder="isbn Number">
+             <div class="form-control-feedback"
+                  *ngIf="isbn.errors && (isbn.dirty || isbn.touched)">
+                 <p *ngIf="isbn.errors.required">isbn number is required</p>
+             </div>
+            </div>
+    
+             <div class="form-group">
+                <input type="date"
+                       class="form-control"
+                       name="published"
+                       [(ngModel)]="model.published"
+                       required
+                       #published="ngModel"
+                       placeholder="Publication Date"
+                       [value]= published
+                       >
+       </div>
+                <div class="form-control-feedback"
+                     *ngIf="published.errors && (published.dirty || published.touched)">
+                    <p *ngIf="published.errors.required">published is required</p>
+                </div>
+    
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="coverPhotoURL"
+                           [(ngModel)]="model.coverPhotoURL"
+                           required
+                           #coverPhotoURL="ngModel"
+                           placeholder="Cover Photo URL">
+           </div>
+                    <div class="form-control-feedback"
+                         *ngIf="coverPhotoURL.errors && (coverPhotoURL.dirty || coverPhotoURL.touched)">
+                        <p *ngIf="coverPhotoURL.errors.required">Cover Photo UR is required</p>
+                    </div>
+            
+    
+        
+            <button type="submit"
+                    class="btn btn-primary"
+                    [disabled]="f.invalid">Submit
+            </button>
+            <button  class="btn btn-primary add-btn"
+                (click)= clearForm(f)
+                [disabled]="f.invalid">Add Book
+            </button>
+            <button  class="btn btn-primary add-btn"
+            (click)= updateBook(f.value)>Update Book
+        </button>
+        
+            <!-- <pre>{{f.value | json}}</pre> -->
+        </form>
+     </div>
+</div> 
