@@ -37,7 +37,9 @@ export class ListComponent implements OnInit {
     this.model.coverPhotoURL =  this.imageSrc;
   }
   deleteBook(item){
-    this._bookService.removeBookItem(item)
+    this._bookService.removeBookItem(item);
+    this.initModel();
+
   }
   onSubmit(f){
    this._bookService.addBookItem(f)
